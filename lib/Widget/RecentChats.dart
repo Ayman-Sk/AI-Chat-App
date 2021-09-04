@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:chatapp/Models/User.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +8,7 @@ import 'package:http/http.dart' as http;
 import '../DummyData.dart';
 import '../Screens/ChatScreen.dart';
 import '../Provider/Conversation.dart';
+import '../Models/User.dart';
 
 class RecentChats extends StatefulWidget {
   final User me;

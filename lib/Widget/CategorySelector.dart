@@ -1,15 +1,16 @@
 import 'dart:convert';
 
-import 'package:chatapp/Models/Message.dart';
-import 'package:chatapp/Models/User.dart';
-import 'package:chatapp/Provider/Conversation.dart';
-import 'package:chatapp/Widget/RecentChats.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Screens/RequestsScreen.dart';
 import '../DummyData.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import '../Models/Message.dart';
+import '../Models/User.dart';
+import '../Provider/Conversation.dart';
+import '../Widget/RecentChats.dart';
 
 // ignore: must_be_immutable
 class CategorySelector extends StatefulWidget {

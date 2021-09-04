@@ -1,6 +1,4 @@
-import 'package:chatapp/Screens/HomeAppScreen.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import 'Screens/LoginScreen.dart';
@@ -9,7 +7,6 @@ import 'Models/Message.dart';
 import 'Models/User.dart';
 import 'Screens/HomeAppScreen.dart';
 
-final urlll = 'sdfsd';
 void main(List<String> args) => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -36,19 +33,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.red,
           accentColor: Color(0XFFFEF9EB),
-          // accentColor: Colors.yellow[50],
         ),
         initialRoute: LoginScreen.LoginScreenRoute,
-        // initialRoute: CategorySelector.categorySelectorRoute,
-        // initialRoute: HomeAppScreen.homeAppScreenRoute,
         routes: {
           HomeAppScreen.homeAppScreenRoute: (_) => HomeAppScreen(
               me: User(id: 0, imageUrl: '', name: 's', phoneNumber: '5'),
               listContacts: []),
           LoginScreen.LoginScreenRoute: (_) => LoginScreen(),
-          // CategorySelector.categorySelectorRoute: (_) => CategorySelector(
-          //     me: User(id: 0, imageUrl: '', name: 's', phoneNumber: '5'),
-          //     listContacts: [])
         },
       ),
     );

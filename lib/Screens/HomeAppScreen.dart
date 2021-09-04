@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:contacts_service/contacts_service.dart';
 import 'package:provider/provider.dart';

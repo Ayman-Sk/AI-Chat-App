@@ -1,15 +1,13 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
-
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:http/http.dart' as http;
 
 import '../DummyData.dart';
 import '../Models/User.dart';
 import '../Screens/LoginScreen.dart';
-
-import 'package:flutter/material.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   static const ResetPasswordScreenRoute = '/ResetPasswordScreenRoute';

@@ -1,11 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:chatapp/DummyData.dart';
-import 'package:chatapp/Screens/RequestsScreen.dart';
-import 'package:chatapp/Widget/CategorySelector.dart';
 import 'package:flutter/material.dart';
-
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +10,7 @@ import '../Models/User.dart';
 import '../Screens/HomeAppScreen.dart';
 import '../Screens/ResetPassword.dart';
 import '../Screens/SignupScreen.dart';
+import '../Screens/RequestsScreen.dart';
 import '../DummyData.dart';
 
 class LoginScreen extends StatefulWidget {
