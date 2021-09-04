@@ -19,10 +19,6 @@ import '../DummyData.dart';
 class LoginScreen extends StatefulWidget {
   static const LoginScreenRoute = '/LoginScreenRoute';
 
-  // static const String url = 'http://192.168.1.103:5000/login';
-  // // static const String url = 'http://192.168.42.130:5000/login';
-  // static const String url = 'http://192.168.42.206:5000/login';
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -118,8 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 labelStyle: TextStyle(color: Colors.red[300]),
                                 filled: true,
                                 fillColor: Color(0xFF212121),
-
-                                // focusColor: Colors.green,
                                 focusedBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.red, width: 2),
@@ -157,8 +151,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelStyle: TextStyle(color: Colors.red[300]),
                                   filled: true,
                                   fillColor: Color(0xFF212121),
-
-                                  // focusColor: Colors.green,
                                   focusedBorder: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.red, width: 2),
@@ -215,24 +207,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () {
                                 getContact();
                                 getResponse();
-
-                                // getResponse().then((_) {
-                                // print('vvvvvvvvvvvvvvvvvv' +
-                                //     // value.toString() +
-                                //     _load.toString());
-
-                                // if (!_load && value) {
-                                //   Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (_) => HomeAppScreen(
-                                //         me: newUser,
-                                //         listContacts: listContacts,
-                                //       ),
-                                //     ),
-                                //   );
-                                // }
-                                // });
                               },
                               child: Text(
                                 'Login',
@@ -249,11 +223,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.red,
                       ),
                     ),
-                    // Center(
-                    //     child: SignInButton(Buttons.Google, onPressed: () {})),
-                    // Center(
-                    //     child: SignInButton(Buttons.FacebookNew,
-                    //         onPressed: () {})),
                     Padding(
                       padding: const EdgeInsets.only(top: 15.0),
                       child: Text(
@@ -294,63 +263,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login() {
-    // List<Contact> contacts =
-    //     (await ContactsService.getContacts(withThumbnails: false)).toList();
-    // print(contacts.elementAt(0));
-
-    // var client = getClient();
-    // try{
-    //   client.post(Uri.parse(url), body: {
-    //     "username" : userNameController.text,
-    //     "password" : passwordController.text,
-    //   })..then((response) => null);
-    // }
-    // newUser = User(
-    //     id: 0,
-    //     name: userNameController.text,
-    //     email: emailController.text,
-    //     phoneNumber: phoneNumberController.text,
-    //     imageUrl: "");
-    // socket = IO.io(url, <String, dynamic>{
-    //   "transports": ["websocket"],
-    //   "autoConnect": false,
-    // });
-    // socket.connect();
-    // socket.onConnect((data) {
-    //   print(data);
-    //   socket.emit('join_room', {
-    //     'email': emailController.text,
-    //     'room': emailController.text,
-    //     'password': passwordController.text,
-    //   });
-    //   // socket.emit('join_room', {
-    //   //   "user": newUser.toJson(),
-    //   //   "room": newUser.email,
-    //   // });
-
-    //   // socket.on('receive_message', (data) {
-    //   //   setState(() {
-    //   //     newMessage = Message.fromJson(jsonDecode(data['message']));
-    //   //   });
-
-    //   //   print(newMessage!.text);
-    //   // });
-    // });
-    // print(socket.connected);
-    // socket.on('join_room_announcement', (data) => print(data.toString()));
-  }
-
-  // {"title":"Tagliatelle With Purple Sprouting Broccoli, Anchovies And Pecorino"}
   Future<void> getContact() async {
     final PermissionStatus permissionStatus = await _getPermission();
     if (permissionStatus == PermissionStatus.granted) {
       listContacts =
           (await ContactsService.getContacts(withThumbnails: false)).toList();
-
-      // print(listContacts.length);
-      // print(listContacts.elementAt(244).displayName);
-      // print(listContacts.elementAt(244).phones!.elementAt(0).value);
     }
   }
 
@@ -367,77 +284,55 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> getResponse() async {
-    // if (_formKey.currentState!.validate())
-    {
-      // setState(() {
-      //   _load = true;
-      // });
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _load = true;
+      });
       var client = getClient();
-      // print(url + 'login');
       try {
-        client.post(Uri.parse(url), body: {
-          "title":
-             "Tagliatelle With Purple Sprouting Broccoli, Anchovies And Pecorino"
-        }
-
-            // {
-            //   'phone': phoneNumberController.text,
-            //   'password': passwordController.text,
-            // }
-            )
+        client.post(Uri.parse(url + 'login'), body: {
+          'phone': phoneNumberController.text,
+          'password': passwordController.text,
+        })
           ..then((response) {
-            print(response.statusCode.toString());
-            print('bbbbbbbbbbbbbbb'+response.body);
             Map<String, dynamic> data = jsonDecode(response.body);
-            print(data);
+            if (data['response'] != "null") {
+              Map<String, dynamic> userData = jsonDecode(data['response']);
+              newUser = User(
+                  id: 0,
+                  name: userData['username'],
+                  phoneNumber: userData['phone_number'],
+                  imageUrl: userData['image']);
 
-            // print(data['response'][3]);
-            // if (data['response'] != "null") {
-            //   Map<String, dynamic> userData = jsonDecode(data['response']);
-            //   // print(userData.toString());
-            //   // print(userData['username'].toString());
-            //   newUser = User(
-            //       id: 0,
-            //       name: userData['username'],
-            //       phoneNumber: userData['phone_number'],
-            //       imageUrl: userData['image']);
-
-            //   setState(() {
-            //     _load = false;
-            //   });
-            //   print(
-            //       'dddddddddddddddddooooooooooooooooooocccccccccccccccccttttttttttttttttooooooooooorrrrrrrrr' +
-            //           userData['is_doctor'].toString());
-            //   if (userData['is_doctor'] == true) {
-            //     Navigator.pushReplacement(
-            //       context,
-            //       MaterialPageRoute(builder: (_) => RequestsScreen(me: newUser)
-            //           // CategorySelector(
-            //           //   me: newUser,
-            //           //   listContacts: listContacts,
-            //           // ),
-            //           ),
-            //     );
-            //   }
-            // else {
-            //   Navigator.pushReplacement(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (_) => HomeAppScreen(
-            //         me: newUser,
-            //         listContacts: listContacts,
-            //       ),
-            //     ),
-            //   );
-            // }
-            // } else {
-            //   phoneNumberController.clear();
-            //   passwordController.clear();
-            //   passwordFocus.unfocus();
-            //   setState(() {
-            //     _load = false;
-            //   });
-            // }
+              setState(() {
+                _load = false;
+              });
+              if (userData['is_doctor'] == true) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => RequestsScreen(me: newUser),
+                  ),
+                );
+              } else {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => HomeAppScreen(
+                      me: newUser,
+                      listContacts: listContacts,
+                    ),
+                  ),
+                );
+              }
+            } else {
+              phoneNumberController.clear();
+              passwordController.clear();
+              passwordFocus.unfocus();
+              setState(() {
+                _load = false;
+              });
+            }
           });
       } finally {
         client.close();

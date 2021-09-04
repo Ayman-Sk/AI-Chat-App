@@ -18,28 +18,17 @@ class RecentChats extends StatefulWidget {
 
   RecentChats({required this.me, required this.listContacts});
 
-  // static const String url = 'http://192.168.1.103:5000/check';
-  // static const String url = 'http://192.168.42.130:5000/check';
-
   @override
   _RecentChatsState createState() => _RecentChatsState();
 }
 
 class _RecentChatsState extends State<RecentChats> {
-  // bool _load = false;
-
   @override
   Widget build(BuildContext context) {
-    // Widget loadingIndicator = _load
-    //     ? CircularProgressIndicator(
-    //         color: Colors.red,
-    //       )
-    //     : new Container();
     final conversation = Provider.of<Conversation>(context);
 
     return Container(
       decoration: BoxDecoration(
-//          color: Colors.white,
         color: Color(0xFF212121),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
@@ -48,7 +37,6 @@ class _RecentChatsState extends State<RecentChats> {
       ),
       child: Container(
         decoration: BoxDecoration(
-//            color: Colors.white,
           color: Color(0xFF212121),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -90,7 +78,6 @@ class _RecentChatsState extends State<RecentChats> {
                             topRight: Radius.circular(30),
                           ),
                         ),
-                        // color: chats[index].unRead ? Color(0xFFFFEFEE) : Colors.white,
                         child: ListTile(
                           leading: ClipRRect(
                             borderRadius: BorderRadius.circular(50),
@@ -99,7 +86,6 @@ class _RecentChatsState extends State<RecentChats> {
                               child: Image.memory(base64Decode(user.imageUrl)),
                             ),
                           ),
-
                           title: Text(
                             user.name,
                             style: TextStyle(
@@ -145,15 +131,6 @@ class _RecentChatsState extends State<RecentChats> {
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                          // Text(
-                          //   lastMessageSender(message.sender.id, message.text),
-                          //   style: TextStyle(
-                          //     color: Colors.blueGrey,
-                          //     fontSize: 12.0,
-                          //     fontWeight: FontWeight.w600,
-                          //   ),
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
                           trailing: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -203,55 +180,42 @@ class _RecentChatsState extends State<RecentChats> {
 
   void checkAllContact() {
     int id = 0;
-    print("sssss" + widget.listContacts.length.toString());
-    widget.listContacts.forEach((element) {
-      var client = getClient();
-      try {
-        if (element.phones!.length > 0) {
-          String phoneNumber;
-          if (element.phones!.elementAt(0).value![0] == '+') {
-            phoneNumber = element.phones!.elementAt(0).value!;
-          } else {
-            phoneNumber =
-                '+963' + element.phones!.elementAt(0).value!.substring(1);
-          }
-          phoneNumber = phoneNumber.replaceAll(" ", "");
-          print(element.displayName);
-          print(phoneNumber + '\n\n\n');
-          // Provider.of<Conversation>(context, listen: false)
-          //     .addNewUserConversation(
-          //   User(
-          //       id: id++,
-          //       name: element.displayName.toString(),
-          //       phoneNumber: phoneNumber,
-          //       imageUrl: ""),
-          // );
-
-          client.post(Uri.parse(url + 'check'), body: {'phone': phoneNumber})
-            ..then((response) {
-              print(response.statusCode.toString());
-              print(response.body);
-              Map<String, dynamic> data = jsonDecode(response.body);
-              if (data['response'] != "null") {
-                Map<String, dynamic> userData = jsonDecode(data['response']);
-                if (userData['phone_number'] != widget.me.phoneNumber) {
-                  Provider.of<Conversation>(context, listen: false)
-                      .addNewUserConversation(
-                    User(
-                        id: id++,
-                        name: userData['username'],
-                        phoneNumber: userData['phone_number'],
-                        imageUrl: userData['image']),
-                  );
+    widget.listContacts.forEach(
+      (element) {
+        var client = getClient();
+        try {
+          if (element.phones!.length > 0) {
+            String phoneNumber;
+            if (element.phones!.elementAt(0).value![0] == '+') {
+              phoneNumber = element.phones!.elementAt(0).value!;
+            } else {
+              phoneNumber =
+                  '+963' + element.phones!.elementAt(0).value!.substring(1);
+            }
+            phoneNumber = phoneNumber.replaceAll(" ", "");
+            client.post(Uri.parse(url + 'check'), body: {'phone': phoneNumber})
+              ..then((response) {
+                Map<String, dynamic> data = jsonDecode(response.body);
+                if (data['response'] != "null") {
+                  Map<String, dynamic> userData = jsonDecode(data['response']);
+                  if (userData['phone_number'] != widget.me.phoneNumber) {
+                    Provider.of<Conversation>(context, listen: false)
+                        .addNewUserConversation(
+                      User(
+                          id: id++,
+                          name: userData['username'],
+                          phoneNumber: userData['phone_number'],
+                          imageUrl: userData['image']),
+                    );
+                  }
                 }
-              }
-            });
+              });
+          }
+        } finally {
+          client.close();
         }
-      } finally {
-        client.close();
-      }
-    });
-    print(Provider.of<Conversation>(context, listen: false).getUserLength());
+      },
+    );
   }
 
   http.Client getClient() {

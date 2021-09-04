@@ -83,14 +83,12 @@ class _HomeAppScreenState extends State<HomeAppScreen> {
       drawer: DrawerBuild(me: widget.me),
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        // leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
         title: Center(
           child: Text(
             "Chat",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
         ),
-        // actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
         elevation: 0,
       ),
       body: RecentChats(

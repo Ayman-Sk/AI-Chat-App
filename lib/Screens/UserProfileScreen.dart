@@ -32,29 +32,6 @@ class UserProfileScreen extends StatelessWidget {
                 bottomRight: Radius.circular(150),
               ),
             ),
-            // child: Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: [
-            //     Padding(
-            //       padding:
-            //           const EdgeInsets.only(left: 20.0, right: 20.0, top: 40.0),
-            //       child: Text(
-            //         widget.me.phoneNumber.isEmpty ? 'Signup' : 'Edit profile',
-            //         style: TextStyle(
-            //             fontSize: 58,
-            //             fontWeight: FontWeight.bold,
-            //             color: Colors.white),
-            //       ),
-            //     ),
-            //     Padding(
-            //       padding: const EdgeInsets.only(left: 20.0),
-            //       child: Text(
-            //         'Welcom to our chat app',
-            //         style: TextStyle(fontSize: 13.5, color: Colors.white),
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ),
           Expanded(
             child: ListView(

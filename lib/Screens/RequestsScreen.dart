@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import 'ChatScreen.dart';
 import '../DummyData.dart';
 
 class RequestsScreen extends StatefulWidget {
@@ -38,8 +37,6 @@ class _RequestsScreenState extends State<RequestsScreen> {
       print(data);
       socket.emit('join_room',
           {"username": widget.me.name, "room": widget.me.phoneNumber});
-      // socket.emit('join_room',
-      //     {"username": widget.user.name, "room": widget.user.phoneNumber});
       socket.on('receive_message', (data) {
         setState(() {
           newMessage = Message.fromJson(jsonDecode(data['message']));
@@ -75,7 +72,6 @@ class _RequestsScreenState extends State<RequestsScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          //            color: Colors.white,
           color: Color(0xFF212121),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -96,22 +92,14 @@ class _RequestsScreenState extends State<RequestsScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => UserProfileScreen(
-                            user: conversation
-                                .getAlRequest()
-                                .elementAt(index)
-                                .sender,
-                            suciedMessage: conversation
-                                .getAlRequest()
-                                .elementAt(index)
-                                .text,
-                            rate: rate)
-                        // ChatScreen(
-                        //   user:
-                        //       conversation.getAlRequest().elementAt(index).sender,
-                        //   me: widget.me,
-                        // ),
-                        ),
+                      builder: (_) => UserProfileScreen(
+                        user:
+                            conversation.getAlRequest().elementAt(index).sender,
+                        suciedMessage:
+                            conversation.getAlRequest().elementAt(index).text,
+                        rate: rate,
+                      ),
+                    ),
                   );
                 },
                 child: Container(
@@ -125,7 +113,6 @@ class _RequestsScreenState extends State<RequestsScreen> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  // color: chats[index].unRead ? Color(0xFFFFEFEE) : Colors.white,
                   child: ListTile(
                     title: Text(
                       request.elementAt(index).text,
@@ -144,15 +131,6 @@ class _RequestsScreenState extends State<RequestsScreen> {
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
-                    // Text(
-                    //   lastMessageSender(message.sender.id, message.text),
-                    //   style: TextStyle(
-                    //     color: Colors.blueGrey,
-                    //     fontSize: 12.0,
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    //   overflow: TextOverflow.ellipsis,
-                    // ),
                     trailing: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -14,8 +14,6 @@ class DrawerBuild extends StatefulWidget {
 
   DrawerBuild({required this.me});
 
-  // static const String url = 'http://192.168.42.130:5000/logout';
-
   @override
   _DrawerBuildState createState() => _DrawerBuildState();
 }
@@ -44,16 +42,6 @@ class _DrawerBuildState extends State<DrawerBuild> {
                 ),
               ),
             ),
-            // Container(
-            //   color: Colors.black38,
-            //   child: ListTile(
-            //     leading: Icon(Icons.person),
-            //     title: Text('Chat with doctor'),
-            //     onTap: () {
-            //       print('Ayman ');
-            //     },
-            //   ),
-            // ),
             Divider(
               height: 0,
               color: Colors.red,

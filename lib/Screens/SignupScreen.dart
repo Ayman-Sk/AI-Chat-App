@@ -17,12 +17,6 @@ import '../Screens/HomeAppScreen.dart';
 class SignupScreen extends StatefulWidget {
   static const LoginScreenRoute = '/LoginScreenRoute';
 
-  // static const String url = 'http://192.168.1.103:5000/signup';
-  // static const String updateUrl = 'http:///192.168.1.103:5000/update';
-
-  // static const String url = 'http://192.168.42.130:5000/signup';
-  // static const String updateUrl = 'http://192.168.42.130:5000/update';
-
   final User me;
   SignupScreen({required this.me});
 
@@ -165,7 +159,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                 final fileImage = File(image!.path);
                                 List<int> imageBytes =
                                     await fileImage.readAsBytes();
-                                // base64Image = base64Encode(imageBytes);
                                 base64Image = base64Encode(imageBytes);
                                 print("basssssssssssssssssse" + base64Image);
                                 setState(() {
@@ -207,8 +200,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                 labelStyle: TextStyle(color: Colors.red[300]),
                                 filled: true,
                                 fillColor: Color(0xFF212121),
-
-                                // focusColor: Colors.green,
                                 focusedBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.red, width: 2),
@@ -251,8 +242,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                           TextStyle(color: Colors.red[300]),
                                       filled: true,
                                       fillColor: Color(0xFF212121),
-
-                                      // focusColor: Colors.green,
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.red, width: 2),
@@ -294,8 +283,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                           TextStyle(color: Colors.red[300]),
                                       filled: true,
                                       fillColor: Color(0xFF212121),
-
-                                      // focusColor: Colors.green,
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.red, width: 2),
@@ -415,62 +402,11 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  void login() {
-    // List<Contact> contacts =
-    //     (await ContactsService.getContacts(withThumbnails: false)).toList();
-    // print(contacts.elementAt(0));
-
-    // var client = getClient();
-    // try{
-    //   client.post(Uri.parse(url), body: {
-    //     "username" : userNameController.text,
-    //     "password" : passwordController.text,
-    //   })..then((response) => null);
-    // }
-    // newUser = User(
-    //     id: 0,
-    //     name: userNameController.text,
-    //     email: emailController.text,
-    //     phoneNumber: phoneNumberController.text,
-    //     imageUrl: "");
-    // socket = IO.io(url, <String, dynamic>{
-    //   "transports": ["websocket"],
-    //   "autoConnect": false,
-    // });
-    // socket.connect();
-    // socket.onConnect((data) {
-    //   print(data);
-    //   socket.emit('join_room', {
-    //     'email': emailController.text,
-    //     'room': emailController.text,
-    //     'password': passwordController.text,
-    //   });
-    //   // socket.emit('join_room', {
-    //   //   "user": newUser.toJson(),
-    //   //   "room": newUser.email,
-    //   // });
-
-    //   // socket.on('receive_message', (data) {
-    //   //   setState(() {
-    //   //     newMessage = Message.fromJson(jsonDecode(data['message']));
-    //   //   });
-
-    //   //   print(newMessage!.text);
-    //   // });
-    // });
-    // print(socket.connected);
-    // socket.on('join_room_announcement', (data) => print(data.toString()));
-  }
-
   Future<void> getContact() async {
     final PermissionStatus permissionStatus = await _getPermission();
     if (permissionStatus == PermissionStatus.granted) {
       listContacts =
           (await ContactsService.getContacts(withThumbnails: false)).toList();
-
-      // print(listContacts.length);
-      // print(listContacts.elementAt(244).displayName);
-      // print(listContacts.elementAt(244).phones!.elementAt(0).value);
     }
   }
 
@@ -487,8 +423,6 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future<void> getResponse(String state) async {
-    print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
-    print(base64Image);
     if (base64Image.isEmpty) {
       final fileImage = File('Asset/Images/user.png');
       List<int> imageBytes = await fileImage.readAsBytes();
@@ -508,15 +442,8 @@ class _SignupScreenState extends State<SignupScreen> {
             'image': base64Image,
           })
             ..then((response) {
-              // print(response.statusCode.toString());
-              // print(response.body);
               Map<String, dynamic> data = jsonDecode(response.body);
-
-              // print(data['response'][3]);
               if (data['response'] == "done") {
-                // Map<String, dynamic> userData = jsonDecode(data['response']);
-                // print(userData.toString());
-                // print(userData['username'].toString());
                 newUser = User(
                   id: 0,
                   name: userNameController.text,
@@ -551,27 +478,14 @@ class _SignupScreenState extends State<SignupScreen> {
     } else {
       var client = getClient();
       try {
-        // print(userData['username'].toString());
-        print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBb" +
-            base64Image);
         client.post(Uri.parse(url + 'update'), body: {
           'username': name,
           'phone': widget.me.phoneNumber,
           'image': base64Image,
         })
           ..then((response) {
-            // print(response.statusCode.toString());
-            // print(response.body);
             Map<String, dynamic> data = jsonDecode(response.body);
-
-            // print(data['response'][3]);
             if (data['response'] == "done") {
-              // Map<String, dynamic> userData = jsonDecode(data['response']);
-              // print(userData.toString());
-              // print(userData['username'].toString());
-              print(
-                  "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBb" +
-                      base64Image);
               newUser = User(
                 id: 0,
                 name: name,
@@ -582,9 +496,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 _load = false;
               });
               // print(userData['username'].toString());
-              print(
-                  "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBb" +
-                      base64Image);
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -613,35 +524,3 @@ class _SignupScreenState extends State<SignupScreen> {
     return http.Client();
   }
 }
-
-
-
-    // return new Scaffold(
-    //   backgroundColor: Colors.white,
-    //   body:  new Stack(children: <Widget>[new Padding(
-    //     padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20.0),
-    //     child: new ListView(
-
-    //       children: <Widget>[
-    //         new Column(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           crossAxisAlignment: CrossAxisAlignment.center
-    //           ,children: <Widget>[
-    //         new TextField(),
-    //         new TextField(),
-
-    //         new FlatButton(color:Colors.blue,child: new Text('Sign In'),
-    //             onPressed: () {
-    //           setState((){
-    //             _load=true;
-    //           });
-
-    //               //Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>new HomeTest()));
-    //             }
-    //         ),
-
-    //         ],),],
-    //     ),),
-    //     new Align(child: loadingIndicator,alignment: FractionalOffset.center,),
-
-    //   ],));

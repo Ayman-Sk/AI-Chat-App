@@ -30,18 +30,11 @@ class _ChatScreenState extends State<ChatScreen> {
   File? _image;
 
   late IO.Socket socket;
-  // static const String url = 'http://10.0.2.2:5000/';
-  // static const String url = 'http://192.168.1.103:5000/';
-  // static const String url = 'http://127.0.0.1:5000/';
-  // static const String url = 'http://192.168.42.130:5000/';
 
   @override
   void initState() {
     super.initState();
-    // socket = IO.io(url, <String, dynamic>{
-    //   "transports": ["websocket"],
-    //   "autoConnect": false,
-    // });
+
     socket = IO.io(url, <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
@@ -49,11 +42,6 @@ class _ChatScreenState extends State<ChatScreen> {
     socket.connect();
     socket.onConnect(
       (data) {
-        print(data);
-        // socket.emit('join_room',
-        //     {"username": widget.me.name, "room": widget.me.phoneNumber});
-        // socket.emit('join_room',
-        //     {"username": widget.user.name, "room": widget.user.phoneNumber});
         socket.on(
           'receive_message',
           (datais) {
@@ -66,8 +54,6 @@ class _ChatScreenState extends State<ChatScreen> {
         );
       },
     );
-    // print(socket.connected);
-    // socket.on('join_room_announcement', (data) => print(data.toString()));
   }
 
   @override
@@ -140,7 +126,6 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   _buildMessage(Message message) {
-    // final messages = Provider.of<Message>(ctx);
     final conversation = Provider.of<Conversation>(context);
 
     final Container msg = Container(
@@ -216,36 +201,13 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   IconButton get sendIcon {
-    // final conversation = Provider.of<Conversation>(context);
     return IconButton(
-      onPressed: () {
-        // final User currentUser =
-        //     User(id: 0, name: 'Current User', imageUrl: 'ima');
-        // Message message = Message(
-        //     sender: currentUser,
-        //     time: DateTime.now().toString(),
-        //     text: messageController.text,
-        //     unRead: false,
-        //     isLiked: false);
-        // conversation.addMessage(widget.user.name, message);
-      },
+      onPressed: () {},
       icon: Icon(Icons.send),
       color: Theme.of(context).primaryColor,
       iconSize: 25.0,
     );
   }
-
-  // void addNewMessageHandle() {
-  //   final conversation = Provider.of<Conversation>(context);
-  //   final User currentUser = User(id: 0, name: 'Current User', imageUrl: 'ima');
-  //   Message message = Message(
-  //       sender: currentUser,
-  //       time: DateTime.now().toString(),
-  //       text: messageController.text,
-  //       unRead: false,
-  //       isLiked: false);
-  //   conversation.addMessage(widget.user.name, message);
-  // }
 
   IconButton icon = IconButton(
     onPressed: () {},
@@ -254,7 +216,6 @@ class _ChatScreenState extends State<ChatScreen> {
     iconSize: 25.0,
   );
   _buildMessageComposer() {
-    // final conversation = Provider.of<Conversation>(context);
     return Container(
       height: 70.0,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -281,13 +242,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             onPressed: () {
               sendMessage();
-              // if (message != null) {
-              //   conversation.addMessage(widget.user, message!);
-              //   setState(() {
-              //     message = null;
-              //   });
-              // }
-              // conversation.addMessage(widget.user, message);
+
               messageController.clear();
             },
             icon: Icon(Icons.send),
@@ -302,11 +257,6 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> getImage() async {
     final imagePicker = ImagePicker();
     final image = await imagePicker.pickImage(source: ImageSource.gallery);
-    // var x = image!.readAsBytes();
-    // var y = base64Encode(x);
-    // setState(() {
-    //   _image = image as File?;
-    // });
     _image = File(image!.path);
     List<int> imageBytes = _image!.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
@@ -326,13 +276,6 @@ class _ChatScreenState extends State<ChatScreen> {
       'room': widget.user.phoneNumber,
       'message': jsonMessage,
     });
-  }
-
-  void reciveMessage(BuildContext context) {
-    // socket.on('receive_message', (data) {
-    //   Message m = jsonDecode(data['message']);
-    //   Provider.of<Conversation>(context).addMessage(widget.user, m);
-    // });
   }
 
   void sendMessage() {

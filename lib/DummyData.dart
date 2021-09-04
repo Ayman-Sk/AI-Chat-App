@@ -1,38 +1,37 @@
 import 'Models/User.dart';
 // import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-// const String url = 'http://192.168.1.103:5000/';
+const String url = 'http://192.168.1.103:5000/';
 // const String url = 'http://192.168.43.145:5000/';
 // const String url = 'http://192.168.42.16:5000/';
 // const String url = 'http://192.168.42.231:5000/';
 // const String url = 'http://192.168.42.197:5000/';
-// const String url = 'http://obada.pythonanywhere.com/';
-const String url ='https://flutter-diet.herokuapp.com/';
+
 // final IO.Socket socket = IO.io(url, <String, dynamic>{
 //   "transports": ["websocket"],
 //   "autoConnect": false,
 // });
 
-final User currentUser1 = User(
-    id: 0, name: 'Current User', phoneNumber: '+963936309172', imageUrl: 'ima');
+// final User currentUser1 = User(
+//     id: 0, name: 'Current User', phoneNumber: '+963936309172', imageUrl: 'ima');
 
-final User rayan = User(
-    id: 1,
-    name: 'Rayan',
-    phoneNumber: '+9639123456789',
-    imageUrl: 'Asset/Images/Rayan.jpg');
-final User obada = User(
-    id: 2, name: 'obada', imageUrl: 'Asset/Images/Obada.jpg', phoneNumber: '');
-final User dania = User(
-    id: 3, name: 'Dania', imageUrl: 'Asset/Images/Dania.jpg', phoneNumber: '');
-final User nada = User(
-    id: 4, name: 'Nada', imageUrl: 'Asset/Images/Nada.jpg', phoneNumber: '');
-final User abd =
-    User(id: 5, name: 'Abd', imageUrl: 'Asset/Images/Abd.jpg', phoneNumber: '');
-final User ayham = User(
-    id: 6, name: 'Ayham', imageUrl: 'Asset/Images/Ayham.jpg', phoneNumber: '');
-final User haya = User(
-    id: 7, name: 'Haya', imageUrl: 'Asset/Images/Haya.jpg', phoneNumber: '');
+// final User rayan = User(
+//     id: 1,
+//     name: 'Rayan',
+//     phoneNumber: '+9639123456789',
+//     imageUrl: 'Asset/Images/Rayan.jpg');
+// final User obada = User(
+//     id: 2, name: 'obada', imageUrl: 'Asset/Images/Obada.jpg', phoneNumber: '');
+// final User dania = User(
+//     id: 3, name: 'Dania', imageUrl: 'Asset/Images/Dania.jpg', phoneNumber: '');
+// final User nada = User(
+//     id: 4, name: 'Nada', imageUrl: 'Asset/Images/Nada.jpg', phoneNumber: '');
+// final User abd =
+//     User(id: 5, name: 'Abd', imageUrl: 'Asset/Images/Abd.jpg', phoneNumber: '');
+// final User ayham = User(
+//     id: 6, name: 'Ayham', imageUrl: 'Asset/Images/Ayham.jpg', phoneNumber: '');
+// final User haya = User(
+//     id: 7, name: 'Haya', imageUrl: 'Asset/Images/Haya.jpg', phoneNumber: '');
 
 // List<User> favorites = [obada, nada, ayham, haya, rayan];
 

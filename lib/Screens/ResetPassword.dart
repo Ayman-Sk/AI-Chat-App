@@ -14,9 +14,6 @@ import 'package:flutter/material.dart';
 class ResetPasswordScreen extends StatefulWidget {
   static const ResetPasswordScreenRoute = '/ResetPasswordScreenRoute';
 
-  // static const String url = 'http://192.168.1.103:5000/reset';
-  // static const String url = 'http://192.168.42.130:5000/reset';
-
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
@@ -88,13 +85,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 20.0),
-                    //   child: Text(
-                    //     'Welcom to our chat app',
-                    //     style: TextStyle(fontSize: 13.5, color: Colors.white),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -119,8 +109,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 labelStyle: TextStyle(color: Colors.red[300]),
                                 filled: true,
                                 fillColor: Color(0xFF212121),
-
-                                // focusColor: Colors.green,
                                 focusedBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.red, width: 2),
@@ -147,40 +135,38 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             padding: const EdgeInsets.only(
                                 bottom: 15, left: 15.0, right: 15.0),
                             child: TextFormField(
-                                obscureText: true,
-                                enableSuggestions: false,
-                                autocorrect: false,
-                                controller: passwordController,
-                                focusNode: passwordFocus,
-                                style: TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                  labelText: 'New Password',
-
-                                  labelStyle: TextStyle(color: Colors.red[300]),
-                                  filled: true,
-                                  fillColor: Color(0xFF212121),
-
-                                  // focusColor: Colors.green,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.red, width: 2),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.red, width: 2),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
+                              obscureText: true,
+                              enableSuggestions: false,
+                              autocorrect: false,
+                              controller: passwordController,
+                              focusNode: passwordFocus,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                labelText: 'New Password',
+                                labelStyle: TextStyle(color: Colors.red[300]),
+                                filled: true,
+                                fillColor: Color(0xFF212121),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.red, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.visiblePassword,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty)
-                                    return 'Please enter your password';
-                                  return null;
-                                },
-                                onFieldSubmitted: (_) => FocusScope.of(context)
-                                    .requestFocus(confirmPasswordFocus)),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.red, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.next,
+                              keyboardType: TextInputType.visiblePassword,
+                              validator: (value) {
+                                if (value == null || value.isEmpty)
+                                  return 'Please enter your password';
+                                return null;
+                              },
+                              onFieldSubmitted: (_) => FocusScope.of(context)
+                                  .requestFocus(confirmPasswordFocus),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -194,12 +180,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 style: TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                   labelText: 'Re-Enter New Password',
-
                                   labelStyle: TextStyle(color: Colors.red[300]),
                                   filled: true,
                                   fillColor: Color(0xFF212121),
-
-                                  // focusColor: Colors.green,
                                   focusedBorder: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.red, width: 2),
@@ -222,13 +205,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 },
                                 onFieldSubmitted: (_) => getResponse()),
                           ),
-                          // TextButton(
-                          //   onPressed: () {},
-                          //   child: Text(
-                          //     'Forget password ?',
-                          //     style: TextStyle(color: Colors.red[300]),
-                          //   ),
-                          // ),
                           Container(
                             padding: const EdgeInsets.only(
                                 bottom: 20.0, left: 20.0, right: 20.0),
@@ -246,26 +222,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                           side:
                                               BorderSide(color: Colors.red)))),
                               onPressed: () {
-                                // getContact();
                                 getResponse();
-
-                                // getResponse().then((_) {
-                                // print('vvvvvvvvvvvvvvvvvv' +
-                                //     // value.toString() +
-                                //     _load.toString());
-
-                                // if (!_load && value) {
-                                //   Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (_) => HomeAppScreen(
-                                //         me: newUser,
-                                //         listContacts: listContacts,
-                                //       ),
-                                //     ),
-                                //   );
-                                // }
-                                // });
                               },
                               child: Text(
                                 'Reset Password',
@@ -282,11 +239,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         color: Colors.red,
                       ),
                     ),
-                    // Center(
-                    //     child: SignInButton(Buttons.Google, onPressed: () {})),
-                    // Center(
-                    //     child: SignInButton(Buttons.FacebookNew,
-                    //         onPressed: () {})),
                     Padding(
                       padding: const EdgeInsets.only(top: 15.0),
                       child: Text('Don\'t have an account ?',
@@ -330,37 +282,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   builder: (_) => LoginScreen(),
                 ),
               );
-              // print(response.statusCode.toString());
-              // print(response.body);
-              // Map<String, dynamic> data = jsonDecode(response.body);
-
-              // // print(data['response'][3]);
-              // if (data['response'] != "null") {
-              //   Map<String, dynamic> userData = jsonDecode(data['response']);
-              //   // print(userData.toString());
-              //   // print(userData['username'].toString());
-              //   newUser = User(
-              //       id: 0,
-              //       name: userData['username'],
-              //       phoneNumber: userData['phone_number'],
-              //       imageUrl: "");
-              //   setState(() {
-              //     _load = false;
-              //   });
-              //   Navigator.pushReplacement(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (_) => HomeAppScreen(
-              //         me: newUser,
-              //         listContacts: listContacts,
-              //       ),
-              //     ),
-              //   );
-              // } else {
-              //   userNameController.clear();
-              //   passwordController.clear();
-              //   passwordFocus.unfocus();
-              // }
             },
           );
       } finally {
@@ -376,35 +297,3 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return http.Client();
   }
 }
-
-
-
-    // return new Scaffold(
-    //   backgroundColor: Colors.white,
-    //   body:  new Stack(children: <Widget>[new Padding(
-    //     padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20.0),
-    //     child: new ListView(
-
-    //       children: <Widget>[
-    //         new Column(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           crossAxisAlignment: CrossAxisAlignment.center
-    //           ,children: <Widget>[
-    //         new TextField(),
-    //         new TextField(),
-
-    //         new FlatButton(color:Colors.blue,child: new Text('Sign In'),
-    //             onPressed: () {
-    //           setState((){
-    //             _load=true;
-    //           });
-
-    //               //Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>new HomeTest()));
-    //             }
-    //         ),
-
-    //         ],),],
-    //     ),),
-    //     new Align(child: loadingIndicator,alignment: FractionalOffset.center,),
-
-    //   ],));

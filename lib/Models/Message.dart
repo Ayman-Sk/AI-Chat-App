@@ -46,12 +46,8 @@ class Message with ChangeNotifier {
 
   File readMessage() {
     List<int> imageBytes = base64Decode(this.text);
-    File x = File('ayman.jpg');
-    x.writeAsBytesSync(imageBytes);
-    return x;
-    // File('ayman').writeAsBytesSync(imageBytes).then((value) {
-    //   return value;
-    // });
-    // return File('AAAAyman');
+    File file = File('ayman.jpg');
+    file.writeAsBytesSync(imageBytes);
+    return file;
   }
 }
